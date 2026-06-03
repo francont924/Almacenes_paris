@@ -14,8 +14,6 @@ import org.springframework.web.context.request.WebRequest;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-
-    // 🔴 1. Captura cuando un recurso no es encontrado (404 Not Found)
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ErrorResponse> manejarResourceNotFound(ResourceNotFoundException ex, WebRequest request) {
         ErrorResponse error = new ErrorResponse(
@@ -27,11 +25,9 @@ public class GlobalExceptionHandler {
         );
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
-
-    // 🔴 2. Captura los errores de validación de los DTOs (@Valid, @NotBlank, @Email, etc.) (400 Bad Request)
+    
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> manejarValidacionesDto(MethodArgumentNotValidException ex, WebRequest request) {
-        // Juntamos todos los campos que fallaron con sus respectivos mensajes en un mapa
         Map<String, String> errores = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
             String campo = ((FieldError) error).getField();
@@ -49,7 +45,6 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
-    // 🔴 3. Captura cualquier otro error genérico imprevisto (500 Internal Server Error)
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> manejarErroresGlobales(Exception ex, WebRequest request) {
         ErrorResponse error = new ErrorResponse(

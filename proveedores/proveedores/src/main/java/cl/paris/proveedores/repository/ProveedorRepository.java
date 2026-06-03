@@ -1,4 +1,4 @@
-package cl.paris.proveedores.repository; // 🟢 Asegúrate de que termine en 'repository' con minúscula
+package cl.paris.proveedores.repository;
 
 import java.util.Optional;
 
