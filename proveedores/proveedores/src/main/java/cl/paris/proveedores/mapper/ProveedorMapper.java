@@ -9,7 +9,6 @@ import cl.paris.proveedores.model.Proveedor;
 @Component
 public class ProveedorMapper {
 
-    // 🟢 Transforma RequestDto en Entidad
     public Proveedor toEntity(ProveedorRequestDto dto) {
         if (dto == null) return null;
         
@@ -22,7 +21,6 @@ public class ProveedorMapper {
         return proveedor;
     }
 
-    // 🟢 Transforma Entidad en ResponseDto (¡Revisa que se llame exactamente toResponseDto!)
     public ProveedorResponseDto toResponseDto(Proveedor entidad) {
         if (entidad == null) return null;
 
